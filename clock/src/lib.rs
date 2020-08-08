@@ -18,6 +18,14 @@ impl Clock {
         }
     }
 
+    pub fn hours(&self) -> i32 {
+        self.minutes / 60
+    }
+
+    pub fn minutes(&self) -> i32 {
+        self.minutes % 60
+    }
+
     fn normalize_mins(minutes: i32) -> i32 {
         minutes.rem_euclid(24 * 60)
     }
@@ -25,9 +33,7 @@ impl Clock {
 
 impl fmt::Display for Clock {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let hours = (self.minutes / 60) % 24;
-        let minutes = self.minutes % 60;
-        write!(f, "{:>02}:{:>02}", hours, minutes)
+        write!(f, "{:>02}:{:>02}", self.hours(), self.minutes())
     }
 }
 
