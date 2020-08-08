@@ -7,23 +7,19 @@ pub struct Clock {
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        return Clock {
+        Self {
             minutes: Clock::normalize_mins(hours * 60 + minutes),
-        };
+        }
     }
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
-        return Clock {
+        Self {
             minutes: Clock::normalize_mins(self.minutes + minutes),
-        };
+        }
     }
 
     fn normalize_mins(minutes: i32) -> i32 {
-        let mut mins = minutes % (24 * 60);
-        while mins < 0 {
-            mins += 24 * 60;
-        }
-        return mins;
+        minutes.rem_euclid(24 * 60)
     }
 }
 
